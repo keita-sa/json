@@ -12,13 +12,6 @@ type User struct {
 	Age       int    `json:"age"`
 }
 
-func decodeHandler(w http.ResponseWriter, r *http.Request) {
-	var user User                         // structで定義されたUser型の変数user
-	json.NewDecoder(r.Body).Decode(&user) // JSONデータを読み込み、decodeして構造体Userのuserのアドレスに格納
-
-	fmt.Fprintf(w, "%s %s is %d years old!", user.Firstname, user.Lastname, user.Age) // %sは文字列、%dは整数
-}
-
 func encodeHandler(w http.ResponseWriter, r *http.Request) {
 	peter := User{
 		Firstname: "John",
@@ -27,6 +20,13 @@ func encodeHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	json.NewEncoder(w).Encode(peter) // peterの情報をJSONにencode
+}
+
+func decodeHandler(w http.ResponseWriter, r *http.Request) {
+	var user User                         // structで定義されたUser型の変数user
+	json.NewDecoder(r.Body).Decode(&user) // JSONデータを読み込み、decodeして構造体Userのuserのアドレスに格納
+
+	fmt.Fprintf(w, "%s %s is %d years old!", user.Firstname, user.Lastname, user.Age) // %sは文字列、%dは整数
 }
 
 func main() {
