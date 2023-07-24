@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -12,22 +11,20 @@ type User struct {
 	Age       int    `json:"age"`
 }
 
-func encodeHandler(w http.ResponseWriter, r *http.Request) {
+func encodeHandler(w http.ResponseWriter, r *http.Request){
 	peter := User{
 		Firstname: "John",
 		Lastname:  "Doe",
-		Age:       25,
+		Age:	   25,
 	}
 
-	json.NewEncoder(w).Encode(peter) // peterの情報をJSONにencode
+	json.NewEncoder(w).Encode(peter)  // peterの情報をJSONにencode
 }
 
-func decodeHandler(w http.ResponseWriter, r *http.Request) {
-	var user User                         // structで定義されたUser型の変数user
-	json.NewDecoder(r.Body).Decode(&user) // JSONデータを読み込み、decodeして構造体Userのuserのアドレスに格納
-
-	fmt.Fprintf(w, "%s %s is %d years old!", user.Firstname, user.Lastname, user.Age) // %sは文字列、%dは整数
+func decodeHandler(w http.ResponseWriter, r *http.Request){
+	var 
 }
+
 
 func main() {
 	http.HandleFunc("/encode", encodeHandler)
